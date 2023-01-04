@@ -1,0 +1,24 @@
+<x_index_ejs>
+   <!-- Banner -->
+   <%- partial('_partial/banner.ejs', {
+       mainText: theme.index_banner_text,
+       secondaryText: theme.index_banner_text_secondary,
+       faIconCss: theme.index_font_awesome_icon_css
+   }) %>
+
+   <!-- Content -->
+   <div class="w-100 ph2 ph4-m ph5-l">
+      <!-- Articles Short -->
+
+      <section class="mw8 center avenir">
+         <% page.posts.forEach(function(item, index) { %>
+         <% if (!item.draft) { %>
+         <%- partial('_partial/article-short', {item: item, index: index}) %>
+         <% } %>
+         <% }); %>
+      </section>
+
+      <!-- Pagination -->
+      <%- partial('_partial/pagination') %>
+   </div>
+</x_index_ejs>

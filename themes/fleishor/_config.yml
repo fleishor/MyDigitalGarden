@@ -1,0 +1,12 @@
+# Header
+menu:
+  Home: /
+#  Digital Garden: /digitalgarden/DigitalGardenAsGraph.html
+
+# Post
+default_post_title: Untitled
+default_post_icon: fa-file-text-o
+
+# Archive Date Format
+archive_date_format: MMM YYYY
+archive_font_awesome_icon_css: fa-folder-open

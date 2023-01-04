@@ -1,0 +1,43 @@
+<x_partial_article_short_ejs>
+   <article class="bt bb b--black-10">
+      <!-- clickable area -->
+      <a class="db ph3 ph0-l no-underline black dim" href="<%- url_for(item.path) %>">
+         <div class="flex flex-column flex-row-ns">
+            <!-- Title  -->
+            <div style="margin: auto" class="pr3-ns w-100 w-30-ns">
+               <img src="<%- url_for(item.path) + 'Title.png' %>" class="db center" style="max-height: 100px;">
+            </div>
+            <div class=" w-100 w-70-ns pl3-ns">
+               <!-- Date -->
+               <p class="mv0 tr">
+                  <span class="f6 lh-copy mv0">
+                     <% if(item.date) { %>
+                     <%= item.date.format(config.date_format) %>
+                     <% } %>
+                  </span>
+               </p>
+               <!-- Title -->
+               <h1 class="f3 fw1 mt0 lh-title">
+                  <%- item.title || '___NO_TITLE___' %>
+               </h1>
+               <!-- Description -->
+               <p class="f6 f5-l lh-copy">
+                  <%- item.description  %>
+               </p>
+               <!-- Tags -->
+               <p>
+                  <span class="f6 lh-copy mv0">
+                     <% if (item.tags && item.tags.length) {
+                     var tags = [];
+                     item.tags.forEach(function(tag) {
+                        tags.push('<span class="f7 fake-link fw3 ph1 dib" onclick="location.href = \'' + config.root + tag.path + '\'; return false;">#' + tag.name + '</span>');
+                     }); %>
+                     <%- tags.join(' ') %>
+                     <% } %>
+                  </span>
+               </p>
+            </div>
+         </div>
+      </a>
+   </article>
+</x_partial_article_short_ejs>

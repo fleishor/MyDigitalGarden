@@ -1,0 +1,29 @@
+<x_tag_ejs>
+   <!-- Banner -->
+   <%- partial('_partial/banner.ejs') %>
+
+   <!-- Content -->
+   <div class="w-100 ph2 ph4-m ph5-l">
+      <div class="content">
+         <div class="fl w-100 w-80-l mw9 left pr4-ns pr0-m mb4 br-l b--light-gray post-content">
+            <% var title = page.tag;  %> 
+            <% if(title) { %>
+               <h1>Notes related to tag <%- title %></h1>
+            <% } %> 
+            <table>
+                <% page.posts.each(function(item){ %>
+                        <tr>
+                            <td>
+                                <%- full_date(item.date, 'll') %>
+                            </td>
+                            <td>
+                                <a href="<%- url_for(item.path) %>"> <% if (item.title == "") { %> no title <% } else { %> <%- item.title %> <% } %> </a>
+                            </td>
+        
+                        </tr>
+                <% }); %>
+            </table>
+        </div>
+      </div>
+   </div>
+</x_tag_ejs>

@@ -1,0 +1,22 @@
+<x_partial_banner_ejs>
+   <div class="w-100 bg-banner ph5-ns ph3 text-light mb4">
+
+      <nav class="db dt-l w-100 mw10 center border-box pv3">
+         <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+            <% for (var i in theme.menu) { %>
+            <a class="link dim f6 f5-l dib mr3 mr4-l white" href="<%- url_for(theme.menu[i]) %>" title="<%= i %>">
+               <%= i %>
+            </a>
+            <% } %>
+         </div>
+      </nav>
+
+      <!-- Title -->
+      <div class="w-100 mw10 center vh-20 dt">
+         <div class="dtc v-mid white">
+            <h1 class="f1-l f2-m tc tc-m tl-ns mv0"><%- config.title %></h1>
+            <p class="ma0 pb3 f4 fw3 tc tc-m tl-ns"><%- config.subtitle %></p>
+         </div>
+      </div>
+   </div>
+</x_partial_banner_ejs>

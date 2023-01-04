@@ -1,0 +1,19 @@
+// Base
+.content
+  font-size 16px
+
+@css {
+  .post-content>*:first-child {
+      margin-top: 0;
+  }
+}
+
+// Links
+.content
+  a, .fake-link
+    text-decoration none
+    transition color .15s ease-in
+    color $main-color
+    &:hover
+      opacity .5
+      transition all .15s ease-in

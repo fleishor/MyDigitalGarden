@@ -1,0 +1,10 @@
+<x_partial_widget_tags_ejs>
+  <div class="">
+    <h2><%- __('tags') %></h2>
+    <% item.tags.forEach(function(tag) { %>
+    <p>
+      <a class="fw3 ph1 dib" href="<%- config.root + tag.path %>"><%= tag.name %></a>
+    </p>
+    <% }) %>
+  </div>
+</x_partial_widget_tags_ejs>

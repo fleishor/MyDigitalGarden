@@ -1,0 +1,94 @@
+<article>
+    <script src="//unpkg.com/force-graph"></script>
+    <div id="graph" style="height: calc(100% - 100px); border: 1px solid lightgrey"></div>
+
+    <script src="graphData.js"></script>
+    <script>
+       const highlightNodes = new Set();
+       const highlightLinks = new Set();
+       let hoverNode = null;
+       const colorDefault = 'black';
+       const colorPost = 'black';
+       const colorTag = 'green';
+       const colorSelectedNode = 'orange';
+       const colorSelectedNeighborNode = 'orange';
+       const colorDeselectedNode = 'lightgrey';
+       const widthGraphElement = document.getElementById('graph').offsetWidth;
+       const heightGraphElement = document.getElementById('graph').offsetHeight;
+
+       gData.links.forEach((link) => {
+          const a = gData.nodes.find((item) => item.id === link.source);
+          const b = gData.nodes.find((item) => item.id === link.target);
+          !a.neighbors && (a.neighbors = []);
+          !b.neighbors && (b.neighbors = []);
+          a.neighbors.push(b);
+          b.neighbors.push(a);
+
+          !a.links && (a.links = []);
+          !b.links && (b.links = []);
+          a.links.push(link);
+          b.links.push(link);
+       });
+
+       const Graph = ForceGraph()(document.getElementById("graph"))
+          .width(widthGraphElement)
+          .height(heightGraphElement)
+          .graphData(gData)
+          .nodeId("id")
+          .nodeCanvasObject((node, ctx, globalScale) => {
+             const label = node.label;
+             let fontSize = 2;
+             ctx.font = `${fontSize}px Sans-Serif`;
+             const textWidth = ctx.measureText(label).width;
+             const bckgDimensions = [textWidth, fontSize].map((n) => n + fontSize * 0.2); // some padding
+
+             ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+             ctx.fillRect(node.x - bckgDimensions[0] / 2, node.y - bckgDimensions[1] / 2, ...bckgDimensions);
+
+             ctx.textAlign = "center";
+             ctx.textBaseline = "middle";
+             if (hoverNode) {
+                ctx.fillStyle = node === hoverNode ? colorSelectedNode : highlightNodes.has(node) ? colorSelectedNeighborNode : colorDeselectedNode;
+             } else {
+                ctx.fillStyle = label.startsWith('#') ?  colorTag : colorPost;
+             }
+             ctx.fillText(label, node.x, node.y);
+
+             node.__bckgDimensions = bckgDimensions; // to re-use in nodePointerAreaPaint
+          })
+          .nodePointerAreaPaint((node, color, ctx) => {
+             ctx.fillStyle = color;
+             const bckgDimensions = node.__bckgDimensions;
+             bckgDimensions && ctx.fillRect(node.x - bckgDimensions[0] / 2, node.y - bckgDimensions[1] / 2, ...bckgDimensions);
+          })
+          .onNodeHover((node) => {
+             highlightNodes.clear();
+             highlightLinks.clear();
+             if (node) {
+                highlightNodes.add(node);
+                node.neighbors.forEach((neighbor) => highlightNodes.add(neighbor));
+                node.links.forEach((link) => highlightLinks.add(link));
+             }
+
+             hoverNode = node || null;
+          })
+          .autoPauseRedraw(false)
+          .linkColor((link) => (highlightLinks.has(link) ? colorSelectedNode : colorDeselectedNode))
+          .onNodeDragEnd((node) => {
+             node.fx = node.x;
+             node.fy = node.y;
+          })
+          .onLinkHover((link) => {
+             highlightNodes.clear();
+             highlightLinks.clear();
+
+             if (link) {
+                highlightLinks.add(link);
+                highlightNodes.add(link.source);
+                highlightNodes.add(link.target);
+             }
+          });
+    </script>
+
+
+</article>
