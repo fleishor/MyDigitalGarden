@@ -1,18 +1,15 @@
 ---
 date: 2022-11-15 13:50:19
 title: Installation eines Kubernetes Clusters mit Vagrant
-description: Installation eines Kubernetes Clusters mit Vagrant
+description: Vagrant Skript um einen Kubernetes Cluster mit 4 Knoten (1 Master und 3 Worker) und NFS Server (Shared Storage) aufzusetzen.
 tags: 
 - Kubernetes
 - Vagrant
 ---
 
-# Installation eines Kubernetes Cluster mit Vagrant
-Vagrant Skript um einen Kubernetes Cluster mit 4 Knoten (1 Master und 3 Worker) und NFS Server (Shared Storage) aufzusetzen.
-
 # Netzwerk
 
-![Kubernetes Netzwerk](vagrant-kubernetes-netzwerk.drawio.png)
+![Kubernetes Netzwerk](./Installation-eines-Kubernetes-Cluster-mit-Vagrant/vagrant-kubernetes-netzwerk.drawio.png)
 
 # Skripte
 
