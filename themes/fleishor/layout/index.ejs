@@ -10,7 +10,7 @@
    <div class="w-100 ph2 ph4-m ph5-l">
       <!-- Articles Short -->
 
-      <section class="mw8 center avenir">
+      <section class="mw8 center">
          <% page.posts.forEach(function(item, index) { %>
          <% if (!item.draft) { %>
          <%- partial('_partial/article-short', {item: item, index: index}) %>
