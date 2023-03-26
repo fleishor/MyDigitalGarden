@@ -1,7 +1,0 @@
-{
-	"nodes":[
-		{"id":"84e3c503143a7ed2","x":-595,"y":-424,"width":400,"height":400,"type":"file","file":"SmartHome/Docker/Smtp2MQTT/Smtp2MQTT.md"},
-		{"id":"a4b5f19fcda4f63b","x":113,"y":-208,"width":400,"height":400,"type":"file","file":"SmartHome/Docker/WebHook2MQTT/WebHook2MQTT.md"}
-	],
-	"edges":[]
-}
