@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SmartHome/NodeRed/Forward-MQTT-To-Telegram/Forward-MQTT-To-Telegram.md",
+                "file": "ArcGIS/Glossary-for-GIS/Glossary-for-GIS.md",
                 "mode": "source",
                 "source": false
               }
@@ -64,6 +64,14 @@
               "type": "starred",
               "state": {}
             }
+          },
+          {
+            "id": "36563915d6390b8d",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
           }
         ]
       }
@@ -85,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "SmartHome/NodeRed/Forward-MQTT-To-Telegram/Forward-MQTT-To-Telegram.md",
+                "file": "ArcGIS/Glossary-for-GIS/Glossary-for-GIS.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "SmartHome/NodeRed/Forward-MQTT-To-Telegram/Forward-MQTT-To-Telegram.md",
+                "file": "ArcGIS/Glossary-for-GIS/Glossary-for-GIS.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SmartHome/NodeRed/Forward-MQTT-To-Telegram/Forward-MQTT-To-Telegram.md"
+                "file": "ArcGIS/Glossary-for-GIS/Glossary-for-GIS.md"
               }
             }
           }
@@ -148,8 +156,9 @@
   },
   "active": "7af33f7d46a85b09",
   "lastOpenFiles": [
-    "SmartHome/Homematic/Integrate-Voltcraft-Sem6000-on-RaspberryPi/overview.svg.md",
+    "Vagrant/Installation-eines-Kubernetes-Cluster-mit-Vagrant/Installation-eines-Kubernetes-Cluster-mit-Vagrant/vagrant-kubernetes-netzwerk.drawio.png",
     "SmartHome/NodeRed/Forward-MQTT-To-Telegram/Forward-MQTT-To-Telegram.md",
+    "SmartHome/Homematic/Integrate-Voltcraft-Sem6000-on-RaspberryPi/overview.svg.md",
     "SmartHome/Homematic/Integrate-Voltcraft-Sem6000-on-RaspberryPi/Integrate-Voltcraft-Sem6000-on-RaspberryPi.md",
     "SmartHome/Install-Docker/Install-Docker.md",
     "SmartHome/NodeRed/Forward-MQTT-To-Telegram/Forward-MQTT-To-Telegram/06-Create-Telegram-Message-Smtp.png",
