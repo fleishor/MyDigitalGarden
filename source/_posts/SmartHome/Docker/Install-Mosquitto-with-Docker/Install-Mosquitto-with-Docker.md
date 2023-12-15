@@ -1,6 +1,7 @@
 ---
 date: 2022-12-28 14:54:05
 title: Installation Mosquitto with Docker
+image: Mqtt.png
 description: Installation steps for Mosquitto with Docker
 tags: 
 - Docker

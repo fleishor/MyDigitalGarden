@@ -1,6 +1,7 @@
 ---
 date: 2022-12-22 09:50:19
 title: PDFSharp
+image: PDFSharp.png
 description: Read a PDF document with PDFSharp, add some texts and save it with new name
 tags: 
 - C#

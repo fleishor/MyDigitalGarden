@@ -1,6 +1,7 @@
 ---
 date: 2022-11-15 13:50:19
 title: Inter-Pod-Kommunkation mit Flannel
+image: Kubernetes.png
 description: Inter-Pod-Kommunkation mit Flannel
 tags: 
 - Kubernetes

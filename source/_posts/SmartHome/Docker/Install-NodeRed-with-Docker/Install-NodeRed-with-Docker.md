@@ -1,6 +1,7 @@
 ---
 date: 2021-12-28 21:00:11
 title: Installation NodeRed with Docker
+image: NodeRed.png
 description: Installation steps for NodeRed with Docker
 tags: 
 - Docker

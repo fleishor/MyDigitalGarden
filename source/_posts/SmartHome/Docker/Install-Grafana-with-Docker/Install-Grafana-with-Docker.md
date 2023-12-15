@@ -1,7 +1,8 @@
 ---
 date: 2021-12-28 14:54:05
-title: Installation Grafana 8.x with Docker
-description: Installation steps for Grafana 8.x with Docker
+title: Installation Grafana with Docker
+image: Grafana.png
+description: Installation steps for Grafana with Docker
 tags: 
 - Docker
 - Grafana

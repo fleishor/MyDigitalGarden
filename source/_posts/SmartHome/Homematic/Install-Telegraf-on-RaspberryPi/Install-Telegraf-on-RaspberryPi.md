@@ -1,6 +1,7 @@
 ---
 date: 2022-02-11 20:29:50
 title: Install-Telegraf-on-RaspberryPi
+image: Telegraf.png
 description: Installation steps for Telegraf on RaspberryPi without Docker
 tags:
 - Raspberry Pi

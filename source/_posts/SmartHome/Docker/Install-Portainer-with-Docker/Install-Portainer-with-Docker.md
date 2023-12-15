@@ -1,6 +1,7 @@
 ---
 date: 2021-12-28 11:56:25
 title: Installation of Portainer
+image: Portainer.png
 description: Installation steps for Portainer
 tags: 
 - Docker

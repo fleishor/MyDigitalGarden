@@ -1,6 +1,7 @@
 ---
 date: 2021-12-28 21:05:18
 title: Installation Loki with Docker
+image: Loki.png
 description: Installation steps for Loki with Docker
 tags: 
 - Docker

@@ -1,7 +1,8 @@
 ---
 date: 2023-03-16 16:20:05
-title: Dump HDD to image file and mount the image file
-description: Dump hard disc with dd to image file and mount the image file
+title: Backup HDD to image file and mount the image file
+image: LinuxCommandLine.png
+description: Backup hard disc with dd to image file and mount the image file
 tags: 
 - Linux
 ---

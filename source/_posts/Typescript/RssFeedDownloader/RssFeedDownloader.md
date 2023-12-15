@@ -1,27 +1,21 @@
 ---
 date: 2023-11-27
 title: RSSFeedDownloader
-description: Mit RSSFeedDownloader können Prodcasts von VR und von ARD Audiothek heruntergeladen werden
+image: RSS.png
+description: Mit RSSFeedDownloader können Prodcasts von BR und von ARD Audiothek heruntergeladen werden
+external_links:
+  - title: RssFeedDownloader
+    url: https://github.com/fleishor/MyDevelopment/tree/master/RssFeedDownloader
+  - title: ARD-Audiothek-RSS Konverter
+    url: https://github.com/matztam/ARD-Audiothek-RSS
+  - title: RSS Feed für ARD Audiothek Podcasts
+    url: https://blog.sengotta.net/rss-feed-fuer-ard-audiothek-podcasts/
 tags:
   - Typescript
   - NodeJS
 ---
 
-- [Podcast von BR](#podcast-von-br)
-  - [Podcast mit curl herunterladen und in "Podcast.xml" speichern](#podcast-mit-curl-herunterladen-und-in-podcastxml-speichern)
-  - [Verzeichnis ./downloads anlegen](#verzeichnis-downloads-anlegen)
-  - [Filterdatum im Typescript file, line 8 anpassen](#filterdatum-im-typescript-file-line-8-anpassen)
-  - [RssFeedDownloader aufrufen](#rssfeeddownloader-aufrufen)
-  - [Generierte Statements ausführen und Audiodateien herunterladen](#generierte-statements-ausführen-und-audiodateien-herunterladen)
-- [Podcast von der ARD Audiothek herunterladen](#podcast-von-der-ard-audiothek-herunterladen)
-  - [Install ARDAudiothek -\> RSSFeed converter](#install-ardaudiothek---rssfeed-converter)
-  - [Podcast mit curl herunterladen und in "Podcast.xml" speichern](#podcast-mit-curl-herunterladen-und-in-podcastxml-speichern-1)
-  - [Verzeichnis ./downloads anlegen](#verzeichnis-downloads-anlegen-1)
-  - [Filterdatum im Typescript file, line 8 anpassen](#filterdatum-im-typescript-file-line-8-anpassen-1)
-  - [RssFeedDownloader aufrufen](#rssfeeddownloader-aufrufen-1)
-  - [Generierte Statements ausführen und Audiodateien herunterladen](#generierte-statements-ausführen-und-audiodateien-herunterladen-1)
-
-## Podcast von BR
+## Podcast von BR herunterladen
 
 ### Podcast mit curl herunterladen und in "Podcast.xml" speichern
 

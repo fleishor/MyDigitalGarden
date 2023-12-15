@@ -1,6 +1,7 @@
 ---
 date: 2021-12-28 13:46:22
 title: Installation InfluxDB 2.x with Docker
+image: InfluxDB.png
 description: Installation steps for InfluxDB 2.x with Docker
 tags: 
 - Docker

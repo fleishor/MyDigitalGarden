@@ -1,6 +1,7 @@
 ---
 date: 2021-12-27 20:47:24
 title: Windows Terminal Panes
+image: WindowsTerminal.png
 description: Short cuts for Windows Terminal to create panes
 tags: 
 - Windows Terminal

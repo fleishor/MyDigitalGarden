@@ -1,6 +1,7 @@
 ---
 date: 2022-11-28 13:50:19
 title: ClusterIP Service
+image: Kubernetes.png
 description: Erzeugt einen ClusterIP Service für Nginx Pods
 tags: 
 - Kubernetes

@@ -1,6 +1,7 @@
 ---
 date: 2023-03-05 17:51:00
 title: Forward MQTT message to telegram
+image: MqttTelegram.png
 description: Forward MQTT messages from Smtp2MQTT and Webhook2MQTT to Telegram
 tags:
    - Docker

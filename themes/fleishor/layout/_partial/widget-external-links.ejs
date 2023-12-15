@@ -1,0 +1,10 @@
+<x_partial_widget_external_links_ejs>
+  <div class="">
+    <h2><%- __('external_links') %></h2>
+    <% item.external_links.forEach(function(external_link) { %>
+    <p>
+      <a class="fw3 ph1 dib" href="<%= external_link.url %>"><%= external_link.title %></a>
+    </p>
+    <% }) %>
+  </div>
+</x_partial_widget_external_links_ejs>

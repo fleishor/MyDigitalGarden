@@ -1,6 +1,7 @@
 ---
 date: 2023-03-04 17:55:00
 title: Smtp2MQTT
+image: SmtpMqtt.png
 description: Save Mail in Filesystem and forward notification with reference via MQTT
 tags: 
 - Docker 

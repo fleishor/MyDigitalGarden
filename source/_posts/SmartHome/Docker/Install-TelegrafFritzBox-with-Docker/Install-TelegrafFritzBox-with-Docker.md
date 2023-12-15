@@ -1,6 +1,7 @@
 ---
 date: 2021-12-28 20:26:45
 title: Installation Telegraf-FritzBox with Docker
+image: AvmTelegraf.png
 description: Create a Docker image which fetch statistics from FritzBox and send them to Telegraf
 tags: 
 - Docker

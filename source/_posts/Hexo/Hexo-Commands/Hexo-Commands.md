@@ -1,6 +1,7 @@
 ---
 date: 2021-12-28 10:14:19
 title: Hexo-Commands
+image: Hexo.png
 description: Commonly used commands for Hexo
 tags: 
 - Hexo

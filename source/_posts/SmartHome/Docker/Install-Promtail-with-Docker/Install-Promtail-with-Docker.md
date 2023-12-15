@@ -1,6 +1,7 @@
 ---
 date: 2021-12-29 08:55:18
 title: Installation Promtail with Docker
+image: Promtail.png
 description: Installation steps for Promtail with Docker
 tags: 
 - Docker

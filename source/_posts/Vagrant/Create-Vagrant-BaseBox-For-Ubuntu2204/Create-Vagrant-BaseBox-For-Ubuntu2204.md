@@ -1,16 +1,23 @@
 ---
-date: 2023-08-30 20:43:19
+date: 2023-12-15
 title: Create a Vagrant base box for Ubuntu 22.04 with latest updates
+image: Vagrant.png
 description: Create a Vagrant base box for Ubuntu 22.04 with latest updates. This base box will be used for all other Linux VMs.
-tags: 
-- Vagrant
+tags:
+  - Vagrant
 ---
 
-# Vagrantfile
-~~~Ruby
+## Quellen
+
+- [Github](https://github.com/fleishor/VagrantKubernetesCluster/tree/master/BaseBoxes)
+
+## Vagrantfile
+
+<!-- https://raw.githubusercontent.com/fleishor/VagrantKubernetesCluster/master/Vagrantfile -->
+~~~ruby
 # Set IP Adresses of Master and Worker nodes
 DESKTOP_IP      = "192.168.56.1"
-UBUNTU_IP       = "192.168.56.8"
+UBUNTU_IP      = "192.168.56.8"
 
 Vagrant.configure("2") do |config|
   config.vm.box = "generic/ubuntu2204"
@@ -20,7 +27,7 @@ Vagrant.configure("2") do |config|
 
   # disable vbguest additions
   if Vagrant.has_plugin?("vagrant-vbguest")
-    config.vbguest.auto_update = false 
+    config.vbguest.auto_update = true
   end
 
   # use proxy at host machine
@@ -55,7 +62,9 @@ Vagrant.configure("2") do |config|
 end
 ~~~
 
-# provision_ubuntu.sh
+## provision_ubuntu.sh
+
+<!-- https://raw.githubusercontent.com/fleishor/VagrantKubernetesCluster/master/BaseBoxes/provision_ubuntu.sh -->
 ~~~bash
 #!/bin/bash -e
 
@@ -116,7 +125,7 @@ sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup
 sudo sed -i 's/https:\/\//http:\/\//g' /etc/apt/sources.list
 
 echo "--------------------------------------------------------------------------------"
-echo "Update Ubuntu to latest version"
+echo "Update Ubuntu (1. Round)"
 echo "--------------------------------------------------------------------------------"
 sudo apt-get -y update
 sudo apt-get -y upgrade
@@ -125,16 +134,19 @@ echo "--------------------------------------------------------------------------
 echo "Update SSH login"
 echo "--------------------------------------------------------------------------------"
 wget -O /home/vagrant/.ssh/authorized_keys https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub
+
 ~~~
 
-# Vagrant commands
+## Vagrant commands
 
-## Package base box
-~~~ 
+### Package base box
+
+~~~
 vagrant package --base ubuntu2204 --output ubuntu2204-2023-08-29.box
 ~~~
 
-## Add base box to repository
+### Add base box to repository
+
 ~~~
 vagrant box add ubuntu2204-2023-08-29.box --name fleishor/ubuntu2204-2023-08-29
 ~~~

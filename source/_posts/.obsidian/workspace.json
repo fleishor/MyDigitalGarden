@@ -4,15 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "71eb36c686051b68",
+        "id": "5e54a9a12e307d54",
         "type": "tabs",
         "children": [
           {
-            "id": "2057ae6459887216",
+            "id": "6dd23885a82a58a8",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Vagrant/Create-Vagrant-BaseBox-For-Ubuntu2204/Create-Vagrant-BaseBox-For-Ubuntu2204.md",
+                "mode": "source",
+                "source": true
+              }
             }
           }
         ]
@@ -44,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#Loki",
+                "query": "tag:#SmartHome",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -69,12 +73,11 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 326.5
+    "width": 401.5
   },
   "right": {
     "id": "184d48dde2ce34de",
@@ -90,6 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Vagrant/Create-Vagrant-BaseBox-For-Ubuntu2204/Create-Vagrant-BaseBox-For-Ubuntu2204.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -106,6 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Vagrant/Create-Vagrant-BaseBox-For-Ubuntu2204/Create-Vagrant-BaseBox-For-Ubuntu2204.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -127,10 +132,13 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Vagrant/Create-Vagrant-BaseBox-For-Ubuntu2204/Create-Vagrant-BaseBox-For-Ubuntu2204.md"
+              }
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -147,26 +155,30 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "2057ae6459887216",
+  "active": "6dd23885a82a58a8",
   "lastOpenFiles": [
     "Typescript/RssFeedDownloader/RssFeedDownloader.md",
+    "Vagrant/Create-Vagrant-BaseBox-For-Ubuntu2204/Create-Vagrant-BaseBox-For-Ubuntu2204.md",
+    "SmartHome/NodeRed/Forward-MQTT-To-Telegram/Forward-MQTT-To-Telegram.md",
+    "Vagrant/Installation-eines-Kubernetes-Cluster-mit-Vagrant/Installation-eines-Kubernetes-Cluster-mit-Vagrant.md",
+    "SmartHome/Homematic/Integrate-Voltcraft-Sem6000-on-RaspberryPi/Integrate-Voltcraft-Sem6000-on-RaspberryPi.md",
+    "SmartHome/Homematic/Integrate-Voltcraft-Sem6000-on-RaspberryPi/Integrate-Voltcraft-Sem6000-on-RaspberryPi/Title.png",
+    "SmartHome/Homematic/Integrate-Voltcraft-Sem6000-on-RaspberryPi/Integrate-Voltcraft-Sem6000-on-RaspberryPi/overview.svg",
+    "Untitled.canvas",
+    "2023-11-28.md",
+    "SmartHome/Docker/Install-Grafana8-with-Docker/Install-Grafana8-with-Docker.md",
+    "Typescript/RssFeedDownloader/RssFeedDownloader/Title.png",
     "ArcGIS/Glossary-for-GIS/Glossary-for-GIS.md",
     "Vagrant/Installation-eines-Kubernetes-Cluster-mit-Vagrant/Installation-eines-Kubernetes-Cluster-mit-Vagrant/vagrant-kubernetes-netzwerk.drawio.png",
-    "SmartHome/NodeRed/Forward-MQTT-To-Telegram/Forward-MQTT-To-Telegram.md",
     "SmartHome/Homematic/Integrate-Voltcraft-Sem6000-on-RaspberryPi/overview.svg.md",
-    "SmartHome/Homematic/Integrate-Voltcraft-Sem6000-on-RaspberryPi/Integrate-Voltcraft-Sem6000-on-RaspberryPi.md",
     "SmartHome/Install-Docker/Install-Docker.md",
     "SmartHome/NodeRed/Forward-MQTT-To-Telegram/Forward-MQTT-To-Telegram/06-Create-Telegram-Message-Smtp.png",
     "SmartHome/NodeRed/Forward-MQTT-To-Telegram/Forward-MQTT-To-Telegram/01_Workflow.png",
-    "SmartHome/Homematic/Integrate-Voltcraft-Sem6000-on-RaspberryPi/Integrate-Voltcraft-Sem6000-on-RaspberryPi/overview.svg",
     "SmartHome/NodeRed/Forward-MQTT-To-Telegram/Forward-MQTT-To-Telegram",
     "SmartHome/NodeRed/Forward-MQTT-To-Telegram",
     "SmartHome/NodeRed",
-    "SmartHome/Homematic/Integrate-Voltcraft-Sem6000-on-RaspberryPi/Integrate-Voltcraft-Sem6000-on-RaspberryPi/Title.png",
     "SmartHome/Docker/WebHook2MQTT/WebHook2MQTT.md",
     "SmartHome/Docker/Smtp2MQTT/Smtp2MQTT.md",
-    "Untitled.canvas",
-    "SmartHome/Docker/Install-Grafana8-with-Docker/Install-Grafana8-with-Docker.md",
     "SmartHome/Docker/Install-Mosquitto-with-Docker/Install-Mosquitto-with-Docker.md",
     "SmartHome/Docker/Install-TelegrafFritzBox-with-Docker/Install-TelegrafFritzBox-with-Docker.md",
     "SmartHome/Docker/Install-Promtail-with-Docker/Install-Promtail-with-Docker.md",

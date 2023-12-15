@@ -1,6 +1,7 @@
 ---
 date: 2021-12-28 14:32:45
 title: Installation Telegraf with Docker
+image: Telegraf.png
 description: Installation steps for Telegraf with Docker
 tags: 
 - Docker
