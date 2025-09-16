@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Layer_1"
+   viewBox="0 0 58.1 60"
+   width="1815.625"
+   height="1875"
+   version="1.1"
+   sodipodi:docname="elastic-stack.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs5" />
+  <sodipodi:namedview
+     id="namedview5"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.3228"
+     inkscape:cx="906.13383"
+     inkscape:cy="937.11276"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Layer_1" />
+  <style
+     id="style1">
+        .st0 {
+            fill: none
+        }
+
+        .st1,
+        .st2,
+        .st3,
+        .st4 {
+            fill-rule: evenodd;
+            clip-rule: evenodd;
+            fill: #eb0d72
+        }
+
+        .st2,
+        .st3,
+        .st4 {
+            fill: #00a9e5
+        }
+
+        .st3,
+        .st4 {
+            fill: #fed10a
+        }
+
+        .st4 {
+            fill: #3ebeb0
+        }
+    </style>
+  <path
+     class="st0"
+     d="M -11,-10 H 69 V 70 H -11 Z"
+     id="path1" />
+  <path
+     class="st1"
+     d="M 0,6.5 C 0,2.9 2.9,0 6.5,0 h 45.1 c 3.6,0 6.5,2.9 6.5,6.5 V 19 H 0 Z"
+     id="path2" />
+  <path
+     class="st2"
+     d="M 0,41 H 27.8 V 60 H 6.3 C 2.8,60 0,57.1 0,53.5 Z"
+     id="path3" />
+  <path
+     class="st3"
+     d="M 30.2,41 H 58 V 53.5 C 58,57.1 55.2,60 51.7,60 H 30.2 Z"
+     id="path4" />
+  <path
+     class="st4"
+     d="M 0,21 H 58 V 39 H 0 Z"
+     id="path5" />
+</svg>
