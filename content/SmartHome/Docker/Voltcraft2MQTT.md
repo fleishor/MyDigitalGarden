@@ -1,6 +1,5 @@
 ---
 showOnIndexPage: false
-draft: true
 date: 2025-01-10
 title: Voltcraft2MQTT
 image: Image.png

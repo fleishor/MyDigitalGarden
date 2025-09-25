@@ -1,4 +1,5 @@
 ---
+showOnIndexPage: true
 date: 2024-05-17
 title: Command line tools of fritzconnect
 image: avm.png

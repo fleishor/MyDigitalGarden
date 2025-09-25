@@ -1,4 +1,5 @@
 ---
+showOnIndexPage: true
 date: 2021-12-28
 title: Forward all AVM statistics to Telegraf and to InfluxDB2
 description: Create a Docker image which fetch statistics from FritzBox and send them to Telegraf and to InfluxDB2

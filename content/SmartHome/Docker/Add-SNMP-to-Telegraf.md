@@ -1,9 +1,9 @@
 ---
-showOnIndexPage: true
+showOnIndexPage: false
 date: 2024-11-24
 title: Send SNMP statistics via Telegraf to InfluxDB
 image: Telegraf.png
-description: Take statistics from Netgear devices with SNMP and Telegraf and forward them to InfluxDB. The statistics are also written to different buckets 
+description: Take statistics from Netgear devices with SNMP and Telegraf and forward them to InfluxDB. The statistics are also written to different buckets
 tags:
   - Telegraf
   - SNMP

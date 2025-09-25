@@ -1,12 +1,12 @@
 ---
 deprecated: true
 date: 2022-01-11
-title: Install Promtail on RaspberryPi (homematic.fritz.box)
+title: Install Promtail on RaspberryPi
 image: Promtail.png
 description: Installation steps for Promtail on RaspberryPi without Docker
-tags: 
-- Promtail
-- SmartHome
+tags:
+  - Promtail
+  - SmartHome
 ---
 
 ## References

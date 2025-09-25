@@ -1,12 +1,12 @@
 ---
 deprecated: true
 date: 2022-01-11
-title: Install NodeRed on RaspberryPi (homematic.fritz.box)
+title: Install NodeRed on RaspberryPi
 image: NodeRed.png
 description: Installation steps for NodeRed on RaspberryPi without Docker
-tags: 
-- NodeRed
-- SmartHome
+tags:
+  - NodeRed
+  - SmartHome
 ---
 
 ## References

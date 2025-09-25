@@ -1,13 +1,13 @@
 ---
 deprecated: true
 date: 2022-01-30
-title: Integrate Voltcraft SEM6000 (homematic.fritz.box)
+title: Integrate Voltcraft SEM6000
 image: Sem6000.png
-description: Integrate Voltcraft SEM6000 
-tags: 
-- Raspberry Pi
-- SEM6000
-- SmartHome
+description: Integrate Voltcraft SEM6000
+tags:
+  - Raspberry Pi
+  - SEM6000
+  - SmartHome
 ---
 
 ## References
