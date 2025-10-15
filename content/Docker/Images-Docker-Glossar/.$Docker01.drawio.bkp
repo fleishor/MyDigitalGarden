@@ -1,0 +1,40 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.6 Chrome/138.0.7204.100 Electron/37.2.3 Safari/537.36" version="28.0.6">
+  <diagram name="Seite-1" id="xve4r4h3GZ7DJp6fYScR">
+    <mxGraphModel dx="1396" dy="1022" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="IggE4PH4njWMyeOTXhDf-1" value="docker" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="IggE4PH4njWMyeOTXhDf-2" value="kubernetes" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="80" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="IggE4PH4njWMyeOTXhDf-3" value="podman" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="80" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="IggE4PH4njWMyeOTXhDf-4" value="Container Runtime Interface" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="160" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="IggE4PH4njWMyeOTXhDf-5" value="containerd" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="240" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="IggE4PH4njWMyeOTXhDf-6" value="CRI-O" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="240" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="IggE4PH4njWMyeOTXhDf-7" value="Container Runtime Interface" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="320" width="640" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="IggE4PH4njWMyeOTXhDf-8" value="runc" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="400" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="IggE4PH4njWMyeOTXhDf-9" value="container" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="480" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="IggE4PH4njWMyeOTXhDf-10" value="container" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="480" width="160" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
