@@ -56,6 +56,7 @@ ENTRYPOINT ["dotnet", "Road.API.dll"]
 This Dockerfile uses a multi-stage build approach to create an optimized Docker image for your .NET 9 API application.
 
 ### Stage 1: Base Image
+
 ~~~dockerfile
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 USER $APP_UID
@@ -63,12 +64,13 @@ WORKDIR /app
 EXPOSE 8080
 ~~~
 
-•	Uses the official .NET 9 ASP.NET runtime image as the base
-•	Sets the user to the environment variable $APP_UID for security
-•	Sets the working directory to /app
-•	Exposes port 8080 for HTTP traffic
+• Uses the official .NET 9 ASP.NET runtime image as the base
+• Sets the user to the environment variable $APP_UID for security
+• Sets the working directory to /app
+• Exposes port 8080 for HTTP traffic
 
 ### Stage 2: Build Stage
+
 ~~~dockerfile
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Debug
@@ -83,26 +85,28 @@ WORKDIR "/src/Road.API"
 RUN dotnet build "./Road.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 ~~~
 
-•	Uses the full .NET 9 SDK image for building
-•	Defines a build argument with Debug as default
-•	Creates and sets working directory to /src
-•	Copies project files first (for better layer caching)
-•	Restores NuGet packages
-•	Copies all source code
-•	Builds the project to /app/build
+• Uses the full .NET 9 SDK image for building
+• Defines a build argument with Debug as default
+• Creates and sets working directory to /src
+• Copies project files first (for better layer caching)
+• Restores NuGet packages
+• Copies all source code
+• Builds the project to /app/build
 
 ### Stage 3: Publish Stage
+
 ~~~dockerfile
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Debug
 RUN dotnet publish "./Road.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 ~~~
 
-•	Based on the build stage
-•	Publishes the application to create deployment-ready files
-•	The /p:UseAppHost=false flag prevents generating a native executable
+• Based on the build stage
+• Publishes the application to create deployment-ready files
+• The /p:UseAppHost=false flag prevents generating a native executable
 
 ### Stage 4: Final Stage
+
 ~~~dockerfile
 FROM base AS final
 WORKDIR /app
@@ -110,9 +114,9 @@ COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Road.API.dll"]
 ~~~
 
-•	Returns to the smaller runtime image
-•	Copies only the published files from the publish stage
-•	Sets the entry point to run the API with the dotnet command
+• Returns to the smaller runtime image
+• Copies only the published files from the publish stage
+• Sets the entry point to run the API with the dotnet command
 
 This multi-stage approach ensures the final image is as small as possible by including only the runtime and the published application, without all the SDK and build tools needed during development.
 
@@ -121,7 +125,6 @@ This multi-stage approach ensures the final image is as small as possible by inc
 ![[Start-Docker-Project1.png]]
 
 ![[Start-Docker-Project2.png]]
-
 
 ## Build Docker images from command line
 
@@ -184,4 +187,3 @@ PS C:\Users\fleishor\MyDevelopment\DotNet\Mediatr> docker run -p 8080:8080 roada
 [18:08:50 INF] Hosting environment: Production
 [18:08:50 INF] Content root path: /app
 ~~~
-

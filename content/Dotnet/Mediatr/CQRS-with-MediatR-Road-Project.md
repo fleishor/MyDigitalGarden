@@ -41,17 +41,18 @@ In .NET projects, Directory.Build.props is a special MSBuild file that allows yo
 ### Directory.Build.targets
 
 #### Key Differences from Directory.Build.props
-•	Directory.Build.props is imported ***before*** project files (early in build process)
-•	Directory.Build.targets is imported ***after*** project files (late in build process)
+
+• Directory.Build.props is imported ***before*** project files (early in build process)
+• Directory.Build.targets is imported ***after*** project files (late in build process)
 
 #### Common Use Cases
-•	Adding custom build steps
-•	Post-build actions (like copying files to output directories)
-•	***Adding analyzers that need to run after standard compilation***
-•	Modifying build outputs
-•	Customizing publishing behavior
-•	Adding targets that depend on properties defined in individual project files
 
+• Adding custom build steps
+• Post-build actions (like copying files to output directories)
+• ***Adding analyzers that need to run after standard compilation***
+• Modifying build outputs
+• Customizing publishing behavior
+• Adding targets that depend on properties defined in individual project files
 
 <!-- https://raw.githubusercontent.com/fleishor/MyDevelopment/refs/heads/master/DotNet/Mediatr/Directory.Build.targets -->
 ~~~xml
