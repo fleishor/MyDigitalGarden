@@ -7,7 +7,6 @@ description: Authenticate with Node to Keycloak
 tags:
   - Keycloak
   - NodeJS
-  - AIEnhanced
 ---
 
 ## References

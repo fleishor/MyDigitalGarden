@@ -1,13 +1,12 @@
 ---
 showOnIndexPage: true
-date: 2025-09-09
+date: 2025-10-17
 title: Add Serilog to Road-Project
 image: Serilog.png
 description: Add Serilog to Road project; the logs are written as plain text to console and as ([Compact Log Event Format (CLEF)](https://clef-json.org/)) to a file. Additionally we can set a correlation id in the http header.
 tags:
   - Dotnet
 ---
-
 ## References
 
 - [GitHub](https://github.com/fleishor/MyDevelopment/tree/master/DotNet/Mediatr)
