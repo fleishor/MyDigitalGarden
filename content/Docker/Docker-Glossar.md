@@ -70,3 +70,87 @@ tags:
 	3. **Ausführung von Container-Prozessen**: runc führt die Anwendungen innerhalb des Containers aus. Es bietet die notwendige Umgebung, um die im Container enthaltene Software korrekt laufen zu lassen.
 	4. **Zugriff auf Container-Systemaufrufe**: runc ermöglicht den Zugriff auf Systemaufrufe des Host-Betriebssystems, während er gleichzeitig die Isolation aufrechterhält. Dies erlaubt den Containern, mit dem Host zu interagieren, ohne dessen Sicherheit zu gefährden.
 	5. **Standardkonformität**: runc ist ein Referenz-Implementierungstool für den OCI-Runtime-Standard. Es gewährleistet, dass Container, die mit runc erstellt werden, mit anderen OCI-konformen Tools und Laufzeiten interoperabel sind.
+
+## Docker Netzwerk
+Jeder Docker-Container bekommt standardmäßig:
+- **Eine eigene Netzwerknamespace** (eigene IP, Routing-Tabelle, Interfaces)
+- **Virtuelle Netzwerkschnittstellen**, meist `eth0`
+- Eine IP-Adresse, die vom Docker-Netzwerk-Subsystem vergeben wird
+Das Docker-Daemon verwaltet diese Netzwerke über den integrierten **Docker Network Driver**.
+
+### Standard-Netzwerktypen
+
+1. **bridge (Standardnetzwerk)**
+- Jeder Container erhält eine eigene IP im internen Docker-Subnetz (z. B. 172.17.0.0/16)
+- Das Interface im Container heißt `eth0`
+- Der Host kommuniziert über das Interface `docker0`
+- Netzwerkbeispiel:
+~~~
+$ docker run -it alpine sh 
+# ifconfig eth0: inet 172.17.0.2  netmask 255.255.0.0`
+~~~
+- Zugriff auf das Internet erfolgt über NAT über den Host.
+
+2. **host**
+- Der Container teilt sich den Netzwerkstack mit dem Host.
+- Kein separates `eth0`, IP = Host-IP.
+        
+3. **none**
+- Der Container erhält **keine** Netzwerkschnittstelle (außer `lo`).
+- Ideal für isolierte Container oder eigene manuelle Netzwerk-Setups.
+
+### Netzwerkkonfiguration anzeigen
+
+~~~
+$ docker network ls
+NETWORK ID     NAME              DRIVER    SCOPE
+a2d135cd71ea   bridge            bridge    local
+f4cc658795bd   elastic           bridge    local
+0022fb1be500   host              host      local
+5d37fb6c3f14   kind              bridge    local
+c23210e10821   none              null      local
+~~~
+
+~~~
+$ docker network inspect kind
+[
+    {
+        "Name": "kind",
+        "Id": "5d37fb6c3f148455fea71325c1edccb37151ca1c2847bcadb6799dc8e7159ce3",
+        "Created": "2025-10-27T11:40:48.608984977Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": true,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.20.0.0/16",
+                    "Gateway": "172.20.0.1"
+                },
+                {
+                    "Subnet": "fc00:f853:ccd:e793::/64",
+                    "Gateway": "fc00:f853:ccd:e793::1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {
+            "com.docker.network.bridge.enable_ip_masquerade": "true",
+            "com.docker.network.driver.mtu": "1500",
+            "com.docker.network.enable_ipv4": "true"
+        },
+        "Labels": {}
+    }
+]
+~~~
+

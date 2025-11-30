@@ -1,15 +1,15 @@
 ---
-date: 2022-11-15
+date: 2025-10-28
 title: Deploy Nginx und NetShoot
 image: Kubernetes.png
 description: Deploy Nginx und NetShoot
-tags: 
-- Kubernetes
+tags:
+  - Kubernetes
 ---
 
 ## Übersicht
 
-Diese Deployment erzeugt 6 Pods mit jeweils 2 Containers (nginx und netshoot) und 1 Init-Container
+Diese Deployment erzeugt 3 Pods mit jeweils 2 Containers (nginx und netshoot) und 1 Init-Container
 
 ## Skripte
 
@@ -72,13 +72,13 @@ spec:
 
 - Führt eine nginx Webserver im Pod aus.
 - Das nginx Verzeichnis /usr/share/nginx/html wird ein Pod-internes Verzeichnis gemounted
-- Ausserhalt des Pods ist dieses Verzeichnis nicht verfügbar und wenn der Pod sich beendet wird der Inhalt des Verzeichnisses auch gelöscht. (nicht persistent)
+- Ausserhalb des Pods ist dieses Verzeichnis nicht verfügbar und wenn der Pod sich beendet wird der Inhalt des Verzeichnisses auch gelöscht. (nicht persistent)
 
 ## init container
 
 - Der init container schreibt den hostname/podname nach /html/index.html
 - Die index.html wird dann über den nginx ausgeliefert
-- Anschliessend beendet sich der init container und gibt somit den nginx container und netshoot container ""frei"
+- Anschliessend beendet sich der init container und gibt somit den nginx container und netshoot container "frei"
 
 ## netshoot container
 
