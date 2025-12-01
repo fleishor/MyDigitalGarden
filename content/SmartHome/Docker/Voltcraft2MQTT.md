@@ -1,6 +1,7 @@
 ---
-showOnIndexPage: false
-date: 2025-01-10
+showOnIndexPage: true
+draft: false
+date: 2025-12-01
 title: Voltcraft2MQTT
 image: Image.png
 description: Send sensor values from Voltcraft SEM6000 to Home Assistant via MQTT
@@ -329,5 +330,79 @@ WantedBy=multi-user.target
 ~~~
 
 ## Logs in Loki
-
 ![[LogsInLoki.png]]
+
+
+## configuration.yaml and mqtt.yaml
+
+~~~yaml
+default_config:
+
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+influxdb: !include influxdb.yaml
+
+mqtt: !include mqtt.yaml
+~~~
+
+~~~yaml
+- switch:
+      unique_id: sem6000_openmediavault_switch
+      name: "MQTT-OpenMediaVault Switch"
+      state_topic: "sem6000/openmediavault/switch/state"
+      command_topic: "sem6000/openmediavault/switch/set"
+      availability:
+        - topic: "sem6000/openmediavault/available"
+      optimistic: false
+      qos: 0
+      retain: true
+- sensor:
+    - name: "MQTT-OpenMediaVault PowerSwitch"
+      unique_id: sem6000_openmediavault_powerswitch_on_off
+      state_topic: "sem6000/openmediavault/sensor/values"
+      value_template: "{{ value_json.PowerSwitch }}"
+      unit_of_measurement: ""
+      availability:
+        - topic: "sem6000/openmediavault/available"
+    - name: "MQTT-OpenMediaVault PowerInMilliWatt"
+      unique_id: sem6000_openmediavault_power_in_milli_watt
+      device_class: power
+      state_topic: "sem6000/openmediavault/sensor/values"
+      value_template: "{{ value_json.PowerInMilliWatt }}"
+      unit_of_measurement: "mW"
+      availability:
+        - topic: "sem6000/openmediavault/available"
+    - name: "MQTT-OpenMediaVault VotageinVolt"
+      unique_id: sem6000_openmediavault_voltage_in_volt
+      device_class: voltage
+      state_topic: "sem6000/openmediavault/sensor/values"
+      value_template: "{{ value_json.VoltageInVolt }}"
+      unit_of_measurement: "V"
+      availability:
+        - topic: "sem6000/openmediavault/available"
+    - name: "MQTT-OpenMediaVault CurrentInMilliAmpere"
+      unique_id: sem6000_openmediavault_current_in_milli_ampere
+      device_class: current
+      state_topic: "sem6000/openmediavault/sensor/values"
+      value_template: "{{ value_json.CurrentInMilliAmpere }}"
+      unit_of_measurement: "mA"
+      availability:
+        - topic: "sem6000/openmediavault/available"
+    - name: "MQTT-OpenMediaVault ConsumptionInKiloWattPerHour"
+      unique_id: sem6000_openmediavault_consumption_in_kw_per_hour
+      device_class: energy
+      state_topic: "sem6000/openmediavault/sensor/values"
+      value_template: "{{ value_json.ConsumptionInKiloWattPerHour }}"
+      unit_of_measurement: "Wh"
+      availability:
+        - topic: "sem6000/openmediavault/available"
+~~~
+## MQTT Explorer
+![[MQTTExplorer-Connection.png]]
+
+![[MQTTExplorer-Data.png]]
