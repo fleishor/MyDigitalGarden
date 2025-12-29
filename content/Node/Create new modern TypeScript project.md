@@ -1,7 +1,7 @@
 ---
 showOnIndexPage: true
 draft: true
-date: 024-11-08
+date: 2025-11-08
 title: Create a new modern TypeScript project
 image: Node.png
 description: Create a new modern TypeScript project
