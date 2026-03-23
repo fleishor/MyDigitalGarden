@@ -19,6 +19,7 @@ tags:
 - [Server Administration Guide](https://www.keycloak.org/docs/latest/server_admin/index.html)
 - [JWT standard](https://www.iana.org/assignments/jwt/jwt.xhtml)
 - [Keycloak](https://www.youtube.com/playlist?list=PLeLcvrwLe187DykEKXg-9Urd1Z6MQT61d)
+- [Getting Started With Keycloak in 2026](https://www.youtube.com/watch?v=neqUYC61tUM)
 
 ## Realm
 
