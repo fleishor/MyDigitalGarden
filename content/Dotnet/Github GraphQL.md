@@ -28,3 +28,26 @@ Important keyboard short cuts:
 GraphQL explorer has also a kind of IntelliSense which shows all possible attributes
 
 ![[IntelliSense.png]]
+
+
+~~~
+query {
+  result: programSet(id: 5945518) {
+    items(
+      first: 1
+      orderBy: PUBLISH_DATE_DESC
+      filter: { isPublished: { equalTo: true } }
+    ) {
+      nodes {
+        title
+        publishDate
+        audios {
+          title
+          url
+          mimeType
+        }
+      }
+    }
+  }
+}
+~~~

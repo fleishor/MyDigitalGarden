@@ -330,8 +330,8 @@ WantedBy=multi-user.target
 ~~~
 
 ## Logs in Loki
-![[LogsInLoki.png]]
 
+![[LogsInLoki.png]]
 
 ## configuration.yaml and mqtt.yaml
 
@@ -402,7 +402,9 @@ mqtt: !include mqtt.yaml
       availability:
         - topic: "sem6000/openmediavault/available"
 ~~~
+
 ## MQTT Explorer
+
 ![[MQTTExplorer-Connection.png]]
 
 ![[MQTTExplorer-Data.png]]

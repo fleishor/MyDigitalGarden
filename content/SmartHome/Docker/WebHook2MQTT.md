@@ -14,9 +14,9 @@ tags:
 
 ## References
 
-<https://betterstack.com/community/guides/logging/how-to-install-setup-and-use-winston-and-morgan-to-log-node-js-applications/>
-<http://www.steves-internet-guide.com/using-node-mqtt-client/>
-<https://nodejs.org/en/docs/guides/nodejs-docker-webapp/>
+- [A Complete Guide to Winston Logging in Node.js](https://betterstack.com/community/guides/logging/how-to-install-setup-and-use-winston-and-morgan-to-log-node-js-applications/)
+- [Using the Node.js MQTT Client-Starting Guide](http://www.steves-internet-guide.com/using-node-mqtt-client/)
+- [Dockerizing a Node.js Web Application](https://semaphore.io/community/tutorials/dockerizing-a-node-js-web-application)
 
 ## File tsconfig.json
 

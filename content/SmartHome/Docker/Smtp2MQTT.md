@@ -23,15 +23,13 @@ tags:
 
 ~~~json
 {
+  "extends": "@tsconfig/node24/tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "target": "es6",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "outDir": "dist"
+    "outDir": "./dist",
+    "rootDir": "./src"
   },
-  "lib": ["es2015"]
+  "include": ["**/*.ts"],
+  "exclude": ["dist"]
 }
 ~~~
 
@@ -44,66 +42,92 @@ tags:
   "description": "",
   "main": "./dist/smtp2mqtt.js",
   "scripts": {
-    "buildImage": "docker build . -t smtp2mqtt",
-    "build": "npx tsc",
-    "smtp2mqtt": "node ./dist/smtp2mqtt.js"
+    "dev": "tsx --watch src/smtp2mqtt.ts",
+    "start": "node dist/smtp2mqtt.js",
+    "build": "tsc",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "buildImage": "docker build . -t smtp2mqtt:20260402"
   },
   "author": "",
   "license": "ISC",
+  "type": "module",
   "devDependencies": {
-    "@types/express": "^4.17.15",
-    "@types/node": "^18.14.0",
-    "@typescript-eslint/eslint-plugin": "^5.53.0",
-    "@typescript-eslint/parser": "^5.53.0",
-    "eslint": "^8.34.0",
-    "mqtt": "^4.3.7",
-    "typescript": "^4.9.4"
+    "@eslint/js": "^10.0.1",
+    "@tsconfig/node24": "^24.0.4",
+    "@types/express": "^5.0.6",
+    "@types/mailparser": "^3.4.6",
+    "@types/node": "^25.5.0",
+    "@types/smtp-server": "^3.5.12",
+    "eslint": "^10.1.0",
+    "eslint-plugin-perfectionist": "^5.7.0",
+    "mqtt": "^5.15.1",
+    "prettier": "^3.8.1",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2",
+    "typescript-eslint": "^8.58.0"
   },
   "dependencies": {
-    "@types/bunyan": "^1.8.8",
-    "@types/nodemailer": "^6.4.7",
+    "@types/bunyan": "^1.8.11",
+    "@types/nodemailer": "^7.0.11",
     "bunyan": "^1.8.15",
-    "mailparser": "^3.1.0",
-    "smtp-server": "^3.8.0"
+    "mailparser": "^3.9.6",
+    "smtp-server": "^3.18.3"
   }
 }
 ~~~
 
-## File .eslintrc.jrc
+## File eslint.config.js
 
 ~~~javascript
-module.exports = {
-   extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
-   parser: "@typescript-eslint/parser",
-   plugins: ["@typescript-eslint"],
-   root: true,
-};
+// @ts-check
+
+import eslint from "@eslint/js";
+import tseslint from "typescript-eslint";
+import perfectionist from "eslint-plugin-perfectionist";
+
+export default tseslint.config(
+  {
+    ignores: ["**/*.js"],
+  },
+  eslint.configs.recommended,
+  tseslint.configs.strictTypeChecked,
+  tseslint.configs.stylisticTypeChecked,
+  {
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  perfectionist.configs["recommended-natural"],
+);
 ~~~
 
 ## Dockerfile
 
 ~~~yaml
-FROM node:19.3.0-alpine3.16
+FROM node:25-alpine
 
 # Create app directory
 WORKDIR /smtp2mqtt
 
 # Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
-
+COPY package.json tsconfig.json eslint.config.js ./
 RUN npm install
 
-# If you are building your code for production
-# RUN npm ci --only=production
+# Copy app source code
+COPY ./src/smtp2mqtt.ts ./src/
 
-# Bundle app source
-COPY ./dist/smtp2mqtt.js .
+# build application
+RUN npm run build
 
-EXPOSE 3001
-
-CMD [ "node", "/smtp2mqtt/smtp2mqtt.js" ]
+EXPOSE 2525
+CMD [ "node", "/smtp2mqtt/dist/smtp2mqtt.js" ]
 ~~~
 
 ## Generate Javascript from Typescript
@@ -127,34 +151,35 @@ npm run buildImage
 ## Source code smtp2mqtt.ts
 
 ~~~typescript
-import { SMTPServer } from "smtp-server";
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+import bunyan from "bunyan";
+import fs from "fs";
 import { simpleParser } from "mailparser";
 import mqtt from "mqtt";
-import fs from "fs";
-import bunyan from "bunyan";
+import { SMTPServer } from "smtp-server";
 
-function sessionInfoSerializer(sessionInfo) {
+function parsedMailInfoSerializer(parsedMailInfo: { from: string; messageId: string; }) {
    return {
+      from: parsedMailInfo.from,
+      messageId: parsedMailInfo.messageId,
+   };
+}
+
+function sessionInfoSerializer(sessionInfo: { clientHostname: string; id: string; remoteAddress: string; transaction: string; }) {
+   return {
+      clientHostname: sessionInfo.clientHostname,
       id: sessionInfo.id,
       remoteAddress: sessionInfo.remoteAddress,
-      clientHostname: sessionInfo.clientHostname,
       transaction: sessionInfo.transaction,
    };
 }
 
-function parsedMailInfoSerializer(parsedMailInfo) {
-   return {
-      messageId: parsedMailInfo.messageId,
-      from: parsedMailInfo.from,
-   };
-}
-
 const logger = bunyan.createLogger({
-   name: "smtp2mqtt",
    level: "debug",
+   name: "smtp2mqtt",
    serializers: {
-      sessionInfo: sessionInfoSerializer,
       parsedMailInfo: parsedMailInfoSerializer,
+      sessionInfo: sessionInfoSerializer, 
    },
 });
 
@@ -173,101 +198,105 @@ const smtpServer = new SMTPServer({
    // Disable STARTTLS to allow authentication in clear text mode
    disabledCommands: ["STARTTLS"],
    logger: logger,
-   onConnect(session, callback) {
-      logger.info({ sessionInfo: session }, "SMTPServer.onConnect from " + session.clientHostname);
-      return callback();
+   onAuth(auth, session, callback) {
+      logger.info({ sessionInfo: session }, "SMTPServer.onAuth");
+      if (auth.username !== smtpUserName && auth.password !== smtpPassword) {
+         callback(new Error("Invalid username/password:" + auth.username + "/" + auth.password));
+      }
+      callback(null, { user: 123456 }); // where 123 is the user id or similar property
    },
    onClose(session) {
       logger.info({ sessionInfo: session }, "SMTPServer.onClose from " + session.clientHostname);
+   },
+   onConnect(session, callback) {
+      logger.info({ sessionInfo: session }, "SMTPServer.onConnect from " + session.clientHostname);
+      callback();
    },
    onData(stream, session, callback) {
       // Receive email
       logger.info({ sessionInfo: session }, "SMTPServer.onData from " + session.clientHostname);
       simpleParser(stream, {}, (err, parsedMail) => {
          // Parse email
-         logger.info({ sessionInfo: session, parsedMailInfo: parsedMail }, "SMTPServer.onData.simpleParser: start");
+         logger.info({ parsedMailInfo: parsedMail, sessionInfo: session }, "SMTPServer.onData.simpleParser: start");
          if (err) {
             logger.error({ sessionInfo: session }, "SMTPServer.onData.simpleParser: " + err);
          }
 
-         logger.info({ sessionInfo: session, parsedMailInfo: parsedMail }, "SMTPServer.onData.simpleParser: parsed email with subject: " + parsedMail.subject);
+         logger.info({ parsedMailInfo: parsedMail, sessionInfo: session }, "SMTPServer.onData.simpleParser: parsed email with subject: " + parsedMail.subject);
 
          // Parsed mail without attachments
          const parsedMailWithoutAttachments = Object.assign({}, parsedMail);
-         delete parsedMailWithoutAttachments.attachments;
-         parsedMailWithoutAttachments.clientHostname = session.clientHostname;
-         if (!parsedMailWithoutAttachments.html) {
-            logger.info({ sessionInfo: session, parsedMailInfo: parsedMail }, "SMTPServer.onData.simpleParser: replace html with textAsHtml");
-            parsedMailWithoutAttachments.html = parsedMailWithoutAttachments.textAsHtml;
-         }
+         parsedMailWithoutAttachments.attachments = [];
+         parsedMailWithoutAttachments.html = parsedMailWithoutAttachments.html || ( parsedMailWithoutAttachments.textAsHtml ?? false );
 
          // Create directory for writing mail
-         logger.info({ sessionInfo: session, parsedMailInfo: parsedMail }, "SMTPServer.onData.simpleParser: make directory for session.id" + session.id);
+         logger.info({ parsedMailInfo: parsedMail, sessionInfo: session }, "SMTPServer.onData.simpleParser: make directory for session.id" + session.id);
          const dateNowUtc = new Date().toISOString();
          const mailDirectory = dateNowUtc + "_" + session.id;
          fs.mkdirSync(mailDirectory);
 
          // Write email as JSON
-         logger.info({ sessionInfo: session, parsedMailInfo: parsedMail }, "SMTPServer.onData.simpleParser: write JSON file");
+         logger.info({ parsedMailInfo: parsedMail, sessionInfo: session }, "SMTPServer.onData.simpleParser: write JSON file");
          fs.writeFileSync(mailDirectory + "/" + session.id + ".json", JSON.stringify(parsedMailWithoutAttachments));
 
          // Write eamil as HTML
-         logger.info({ sessionInfo: session, parsedMailInfo: parsedMail }, "SMTPServer.onData.simpleParser: write HTML file");
-         fs.writeFileSync(mailDirectory + "/" + session.id + ".html", parsedMailWithoutAttachments.html);
+         logger.info({ parsedMailInfo: parsedMail, sessionInfo: session }, "SMTPServer.onData.simpleParser: write HTML file");
+         fs.writeFileSync(mailDirectory + "/" + session.id + ".html", parsedMailWithoutAttachments.html === false ? "" : parsedMailWithoutAttachments.html);
 
          // Write Attachments
          parsedMail.attachments.forEach((attachment) => {
-            logger.info({ sessionInfo: session, parsedMailInfo: parsedMail }, "SMTPServer.onData.simpleParser: write attachment: " + attachment.filename);
+            logger.info({ parsedMailInfo: parsedMail, sessionInfo: session }, "SMTPServer.onData.simpleParser: write attachment: " + attachment.filename);
             fs.writeFileSync(mailDirectory + "/" + attachment.filename, attachment.content);
          });
 
          // Publish sessionId via MQTT
          if (mqttClientConnected) {
-            const mqttPrefix = "smtp2mqtt";
-            let mqttDevice = parsedMail.from.value["0"].name;
+            const mqttPrefix = "smtp";
+            let mqttDevice = "UnknownDevice";
+            if (!parsedMail.from) {
+               logger.warn({ parsedMailInfo: parsedMail, sessionInfo: session }, "Email has no 'from' address");
+            }
+            else 
+            {
+               mqttDevice = parsedMail.from.value["0"].name;
+            }
             if (!mqttDevice) {
                mqttDevice = session.clientHostname.replace(".fritz.box", "");
             }
 
             let mqttSubDevice = mqttDevice;
-            if (parsedMailWithoutAttachments.subject.indexOf("OpenMediaVault") != -1) {
+            const mailSubject = parsedMailWithoutAttachments.subject ?? "No Subject";
+            if (mailSubject.includes("OpenMediaVault")) {
                mqttSubDevice = "OpenMediaVault";
-            } else if (parsedMailWithoutAttachments.subject.indexOf("Buero") != -1) {
+            } else if (mailSubject.includes("Buero")) {
                mqttSubDevice = "Buero";
-            } else if (parsedMailWithoutAttachments.subject.indexOf("Gefriertruhe") != -1) {
+            } else if (mailSubject.includes("Gefriertruhe")) {
                mqttSubDevice = "Gefriertruhe";
-            } else if (parsedMailWithoutAttachments.subject.indexOf("Kueche") != -1) {
+            } else if (mailSubject.includes("Kueche")) {
                mqttSubDevice = "Kueche";
-            } else if (parsedMailWithoutAttachments.subject.indexOf("Wintergarten") != -1) {
+            } else if (mailSubject.includes("Wintergarten")) {
                mqttSubDevice = "Wintergarten";
             }
 
-            const topic = "/" + mqttPrefix + "/" + mqttDevice + "/" + mqttSubDevice;
+            const topic = mqttPrefix + "/" + mqttDevice + "/" + mqttSubDevice;
             const mqttPayload = JSON.stringify({
-               topic: topic,
-               mqttPrefix: mqttPrefix,
-               mqttDevice: mqttDevice,
-               mqttSubDevice: mqttSubDevice,
-               mailDirectory: mailDirectory,
-               sessionId: session.id,
                clientHostname: session.clientHostname,
+               mailDirectory: mailDirectory,
+               mqttDevice: mqttDevice,
+               mqttPrefix: mqttPrefix,
+               mqttSubDevice: mqttSubDevice,
+               sessionId: session.id,
+               topic: topic,
             });
-            logger.info({ topic: topic, mqttPayload: mqttPayload }, "Publish to MQTT with topic " + topic);
+            logger.info({ mqttPayload: mqttPayload, topic: topic }, "Publish to MQTT with topic " + topic);
             mqttClient.publish(topic, mqttPayload);
          }
 
-         logger.info({ sessionInfo: session, parsedMailInfo: parsedMail }, "SMTPServer.onData.simpleParser: done");
+         logger.info({ parsedMailInfo: parsedMail, sessionInfo: session }, "SMTPServer.onData.simpleParser: done");
          callback();
       });
 
       logger.info({ sessionInfo: session }, "SMTPServer.onData: done");
-   },
-   onAuth(auth, session, callback) {
-      logger.info({ sessionInfo: session }, "SMTPServer.onAuth");
-      if (auth.username !== smtpUserName && auth.password !== smtpPassword) {
-         return callback(new Error("Invalid username/password:" + auth.username + "/" + auth.password));
-      }
-      callback(null, { user: 123456 }); // where 123 is the user id or similar property
    },
 });
 
@@ -329,7 +358,7 @@ version: "3.5"
 
 services:
   smtp2mqtt:
-    image: smtp2mqtt:latest
+    image: smtp2mqtt:20260402
     container_name: smtp2mqtt
     user: 1009:995
     volumes:
@@ -338,10 +367,10 @@ services:
       - "2525:2525"
     restart: always
     networks:
-        - influxdb2
-
+        - smarthome
+        
 networks:
-    influxdb2:
+    smarthome:
         external: true
-        name: "influxdb2"
+        name: "smarthome"
 ~~~
