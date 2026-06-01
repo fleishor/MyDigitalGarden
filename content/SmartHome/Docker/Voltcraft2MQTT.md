@@ -1,9 +1,8 @@
 ---
 showOnIndexPage: true
-draft: false
 date: 2025-12-01
 title: Voltcraft2MQTT
-image: Image.png
+image: Mqtt.png
 description: Send sensor values from Voltcraft SEM6000 to Home Assistant via MQTT
 tags:
   - MQTT

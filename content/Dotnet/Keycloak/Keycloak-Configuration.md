@@ -1,6 +1,5 @@
 ---
 showOnIndexPage: true
-draft: fasle
 date: 2025-04-14
 title: Configuration
 image: Image.png

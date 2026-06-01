@@ -1,8 +1,8 @@
 ---
-showOnIndexPage: false
+showOnIndexPage: true
 draft: true
 date: 2026-04-13
-title: AI - Glossar
+title: Glossar
 image: AI.png
 description: Eine Übersicht über AI Begriffe
 tags:

@@ -9,4 +9,4 @@ tags:
 
 ## Important commands in Quartz4
 
-- `npx quartz build --serve`: Build Static Website from Obsidian and start Web server
+- `npx quartz build --serve --port 9090`: Build Static Website from Obsidian and start Web server

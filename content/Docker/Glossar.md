@@ -1,11 +1,12 @@
 ---
 showOnIndexPage: true
 date: 2025-10-01
-title: Docker - Glossar
+title: Glossar
 image: Docker.png
 description: Eine Übersicht über Docker und die wichtigsten Begriffe bzw. Namens-Fallen
 tags:
   - Docker
+  - AIEnhanced
 ---
 
 ## Docker
@@ -154,6 +155,134 @@ $ docker network inspect kind
 ]
 ~~~
 
-## Docker Images #needs-edit
+## Docker Images
 
-## Docker Volumes #needs-edit
+Docker **Images** sind die Grundlage von Containern. Man kann sie sich wie eine **unveränderliche Bauvorlage oder ein fertiges Abbild einer Anwendung** vorstellen.
+
+### Eigenschaften
+
+- **Unveränderlich (immutable)**: Wird nicht verändert, sondern neu gebaut
+- **Schichten (Layers)**: Images bestehen aus mehreren übereinanderliegenden Layers; spart Speicher und beschleunigt Builds
+- **Wiederverwendbar**: Gleiches Image überall nutzbar (lokal, Server, Cloud) und kann auch von unterschiedlichen Container verwendet werden (siehe [[Secrets]] )
+
+### Woher kommen die Images?
+
+- Docker Hub oder ein anderes Image Registry
+- Private Registries
+- Lokales Dateisystem
+
+### Aufbau in Images
+
+Ein Docker Image ist intern ziemlich strukturiert aufgebaut; nicht eine einfache Datei, sondern ein **Stapel von Schichten (Layers)** plus Metadaten.
+
+Ein Image besteht aus mehreren **übereinanderliegenden Read-Only-Layern**:
+
+~~~
+Layer 5: [ Application Layer ]  
+Layer 4: [ Dependencies Layer ]  
+Layer 3: [ Runtime Layer (z. B. Node, Python, Nginx) ]  
+Layer 2: [ Update Layer ]  
+Layer 1: [ Base Image (z. B. Ubuntu, Alpine) ]
+~~~
+
+Jeder Schritt im Dockerfile erzeugt typischerweise einen neuen Layer.
+
+~~~dockerfile
+FROM ubuntu:22.04             # Layer 1 (Base Image)
+RUN apt-get update            # Layer 2 (Update Layer)
+RUN apt-get install -y nginx  # Layer 3 (Runtime Layer)
+COPY . /app                   # Layer 5 (Application Layer)
+CMD ["nginx", "-g", "daemon off;"]  # Metadaten (kein Layer)
+~~~
+
+### Woraus besteht ein Image?
+
+1. **Layer (Dateisystem)**
+
+- Dateien, Programme, Libraries
+- Jeder Layer speichert nur **Unterschiede zum vorherigen**
+- Layers können zwischen Image geshared werden
+- Layers werden auf dem Client auch gecached, sodass beim docker pull nur die geänderten Layers übertragen werden
+- Die Layers werden mittels UnionFS übereinander gelegt, sodass es für den Container nach nur einem Filesystem aussieht. 
+- Analog zu UnionFS ist nur der oberste Layer ReadWrite. Sobald der Container gelöscht wird, wird auch der oberste ReadWrite-Layer gelöscht.
+
+2. **Image-Konfiguration (Metadata)**
+ 
+ - Startbefehl (`CMD`, `ENTRYPOINT`)
+- Umgebungsvariablen (`ENV`)
+- Arbeitsverzeichnis (`WORKDIR`)
+- Ports (`EXPOSE`)
+
+3. **Manifest**
+
+- Beschreibt, **welche Layer zusammengehören**
+- Wird z. B. beim `docker pull` genutzt
+
+### Layer anschauen
+
+~~~
+docker history secrets:latest
+IMAGE          CREATED         CREATED BY                                      SIZE      COMMENT
+59240a08f96a   6 minutes ago   CMD ["node" "dist/server.js"]                   0B        buildkit.dockerfile.v0
+<missing>      6 minutes ago   EXPOSE [3000/tcp]                               0B        buildkit.dockerfile.v0
+<missing>      6 minutes ago   COPY /app/dist ./dist # buildkit                2.57kB    buildkit.dockerfile.v0
+<missing>      6 minutes ago   RUN /bin/sh -c npm install # buildkit           240MB     buildkit.dockerfile.v0
+<missing>      6 minutes ago   COPY package.json ./ # buildkit                 871B      buildkit.dockerfile.v0
+<missing>      6 minutes ago   WORKDIR /app                                    0B        buildkit.dockerfile.v0
+
+<missing>      22 hours ago    CMD ["node"]                                    0B        buildkit.dockerfile.v0
+<missing>      22 hours ago    ENTRYPOINT ["docker-entrypoint.sh"]             0B        buildkit.dockerfile.v0
+<missing>      22 hours ago    COPY docker-entrypoint.sh /usr/local/bin/ # …   388B      buildkit.dockerfile.v0
+<missing>      22 hours ago    RUN /bin/sh -c apk add --no-cache --virtual …   5.36MB    buildkit.dockerfile.v0
+<missing>      22 hours ago    ENV YARN_VERSION=1.22.22                        0B        buildkit.dockerfile.v0
+<missing>      22 hours ago    RUN /bin/sh -c addgroup -g 1000 node     && …   146MB     buildkit.dockerfile.v0
+<missing>      22 hours ago    ENV NODE_VERSION=24.15.0                        0B        buildkit.dockerfile.v0
+
+<missing>      40 hours ago    CMD ["/bin/sh"]                                 0B        buildkit.dockerfile.v0
+<missing>      40 hours ago    ADD alpine-minirootfs-3.23.4-x86_64.tar.gz /…   8.45MB    buildkit.dockerfile.v0
+~~~
+
+- Die untersten Layers sind das Alpine-Linux System
+- dann komm die Nodejs installation
+- und ganz oben die Anwendung
+
+## Docker Volumes
+
+Docker Volumes sind eine Möglichkeit, **Daten außerhalb eines Containers dauerhaft zu speichern**. Normalerweise sind Container ja „flüchtig“, wenn du sie löscht, sind auch alle darin gespeicherten Daten weg.
+
+Ein Volume wird vom Docker-Host verwaltet und in den Container „eingehängt“ (gemountet).
+
+~~~
+docker run -v mein_volume:/app/data my_container
+~~~
+
+- `mein_volume` → das Volume
+- `/app/data` → Ordner im Container
+
+Alles, was der Container im Verzeichnis /app/data speichert, landet im Volume. Der Speicherort des Volums auf dem Host wird von Docker verwaltet (meistens unter /var/lib/docker/volumes)
+
+## Docker Bind Mounts
+
+Docker **Bind Mounts** sind eine andere Art, Daten in einen Container einzubinden – aber im Gegensatz zu Volumes greifst du dabei **direkt auf einen Ordner oder eine Datei auf deinem Host-System zu**.
+
+~~~
+docker run -v /home/user/mein_ordner:/app/data my_container
+~~~
+
+oder moderner
+
+~~~
+docker run --mount type=bind,source=/home/user/mein_ordner,target=/app/data my_container
+~~~
+
+- `/home/user/mein_ordner` → Ordner auf deinem Rechner (Host)
+- `/app/data` → Ordner im Container
+
+Alles, was im Container unter `/app/data` speichert, passiert **direkt im Host-Ordner**.
+
+Eigenschaften von Bind Mounts:
+
+- **Direkter Zugriff auf Host-Dateien bzw. Devices bei Linux**
+- Änderungen sind **sofort sichtbar (in beide Richtungen)**
+- Kein „Docker-verwalteter Speicher“ wie bei Volumes
+- Funktioniert mit Verzeichnissen und Dateien

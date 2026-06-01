@@ -1,6 +1,5 @@
 ---
 showOnIndexPage: true
-draft: true
 date: 2025-12-10
 title: Kubernetes Cluster with kind
 image: Kubernetes.png

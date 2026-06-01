@@ -1,7 +1,7 @@
 ---
 showOnIndexPage: true
 date: 2024-11-13
-title: Elastic8 - Übersicht
+title: Glossar
 image: Elastic8.png
 description: Eine Übersicht über Elastic8
 tags:

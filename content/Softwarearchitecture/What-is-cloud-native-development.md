@@ -1,7 +1,6 @@
 ---
-showOnIndexPage: false
-draft: true
-date: 2024-12-05
+showOnIndexPage: true
+date: 2026-04-17
 title: What is cloud-native development?
 image: Softwarearchitecture.png
 description: 

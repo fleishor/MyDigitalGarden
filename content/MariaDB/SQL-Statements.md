@@ -1,11 +1,10 @@
 ---
-showOnIndexPage: false
-draft: true
+showOnIndexPage: true
 date: 2025-12-15
 title: SQL-Statements
-image: SQL.png
+image: MariaDB.png
 description: Liste mit interessanten SQL statements
-tags: 
+tags:
 ---
 
 ## SUM() OVER()

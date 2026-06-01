@@ -124,7 +124,25 @@ export default ((userOpts?: Partial<Options>) => {
         </div>
         <template id="template-file">
           <li>
-            <a href="#"></a>
+            <div class="folder-item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                viewBox="5 8 14 8"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="folder-icon"
+              >
+                <circle cx="12" cy="12" r="4"></circle>
+              </svg>
+              <div>
+                <a href="#"></a>
+              </div>
+            </div>
           </li>
         </template>
         <template id="template-folder">

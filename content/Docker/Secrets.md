@@ -1,9 +1,9 @@
 ---
 showOnIndexPage: true
 date: 2026-04-15
-title: Docker - Secrets
+title: Secrets
 image: Docker.png
-description: Das Projekt "Secrets" ist ein Proof of Concept (PoC), das demonstriert, wie Docker Secrets und Configs in einer containerisierten Umgebung verwaltet und genutzt werden. Es zeigt verschiedene Szenarien für den Umgang mit sensitiven Daten und Konfigurationsdateien in Docker Compose.
+description: Das Projekt "Secrets" ist ein Proof of Concept (PoC), das demonstriert, wie Docker Secrets und Configs in einer containerisierten Umgebung verwaltet und genutzt werden.
 tags:
   - Docker
   - AIEnhanced
@@ -69,7 +69,7 @@ Minimal-Setup ohne externe Dateien:
 - Environment: ✅ Nur Umgebungsvariablen
 ~~~
 
-### Mounted Pfade in Containern #needs-edit
+### Mounted Pfade in Containern 
 
 ## Secrets
 

@@ -1,14 +1,13 @@
 ---
 showOnIndexPage: true
 date: 2025-03-17
-title: Keycloak - Glossar
+title: Glossar
 image: Keycloak.png
-description: 
+description:
 tags:
   - Keycloak
   - OAuth2
   - OpenIdConnect
-  - (OIDC)
 ---
 
 ## Referenzen

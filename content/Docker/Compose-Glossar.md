@@ -1,7 +1,7 @@
 ---
 showOnIndexPage: true
 date: 2025-10-01
-title: Docker-Compose - Glossar
+title: Compose - Glossar
 image: Docker.png
 description: Eine Übersicht über Docker-Compose
 tags:

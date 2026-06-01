@@ -1,9 +1,8 @@
 ---
 showOnIndexPage: true
-draft: true
 date: 2025-11-08
 title: Create a new modern TypeScript project
-image: Node.png
+image: Typescript.png
 description: Create a new modern TypeScript project
 tags:
   - NodeJS

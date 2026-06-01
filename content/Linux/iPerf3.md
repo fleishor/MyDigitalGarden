@@ -1,6 +1,5 @@
 ---
 showOnIndexPage: false
-draft: false
 date: 2024-11-08
 title: iPerf(3)
 image: LinuxCommandLine.png
