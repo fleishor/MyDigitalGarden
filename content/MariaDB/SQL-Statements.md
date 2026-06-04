@@ -5,6 +5,7 @@ title: SQL-Statements
 image: MariaDB.png
 description: Liste mit interessanten SQL statements
 tags:
+  - MariaDB
 ---
 
 ## SUM() OVER()
