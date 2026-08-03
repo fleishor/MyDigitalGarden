@@ -1,6 +1,6 @@
 ---
 showOnIndexPage: true
-date: 2026-06-ß2
+date: 2026-06-02
 title: MariaDB Kommandozeile
 image: MariaDB.png
 description:
@@ -12,7 +12,7 @@ tags:
 
 ~~~
 PS C:\Users\fleishor> $env:MYSQL_PWD = "***"
-PS C:\Users\fleishor> mariadb -hlocalhost -P3306 --skip-ssl -uroot chronos_dev_v02 -e "select version();"
+PS C:\Users\fleishor> mariadb -hlocalhost -P3306 --skip-ssl -uroot MyMariaDB -e "select version();"
 +--------------------------+
 | version()                |
 +--------------------------+
@@ -24,7 +24,7 @@ PS C:\Users\fleishor> mariadb -hlocalhost -P3306 --skip-ssl -uroot chronos_dev_v
 ## Ausgabe in Variable speichern
 
 ~~~
-PS C:\Users\fleishor> $result = mariadb -hlocalhost -P3306 --skip-ssl -uroot chronos_dev_v02 -e "select version();"
+PS C:\Users\fleishor> $result = mariadb -hlocalhost -P3306 --skip-ssl -uroot MyMariaDB -e "select version();"
 PS C:\Users\fleishor> Write-Host "Ausgabe: $result"
 Ausgabe: version() 10.11.15-MariaDB-ubu2204
 ~~~
@@ -32,7 +32,7 @@ Ausgabe: version() 10.11.15-MariaDB-ubu2204
 ## Nur Werte zurückgeben
 
 ~~~
-PS C:\Users\fleishor> mariadb -hlocalhost -P3306 --skip-ssl --batch --skip-column-names -uroot chronos_dev_v02 -e "select version();"
+PS C:\Users\fleishor> mariadb -hlocalhost -P3306 --skip-ssl --batch --skip-column-names -uroot MyMariaDB -e "select version();"
 10.11.15-MariaDB-ubu2204
 ~~~
 
@@ -40,7 +40,7 @@ PS C:\Users\fleishor> mariadb -hlocalhost -P3306 --skip-ssl --batch --skip-colum
 ## SQL statement aus einer Datei laden
 
 ~~~
-PS C:\Users\fleishor> Get-Content .\sqlscript.sql | mariadb -hlocalhost -P3306 --skip-ssl -uroot chronos_dev_v02
+PS C:\Users\fleishor> Get-Content .\sqlscript.sql | mariadb -hlocalhost -P3306 --skip-ssl -uroot MyMariaDB
 version()
 10.11.15-MariaDB-ubu2204
 PS C:\Users\fleishor> Write-Host "ExitCode: $LASTEXITCODE"
@@ -50,7 +50,7 @@ ExitCode: 0
 ## XML Ausgabe
 
 ~~~
-PS C:\Users\fleishor> Get-Content .\sqlscript.sql | mariadb -hlocalhost -P13306 --skip-ssl --xml -uroot chronos_dev_v02
+PS C:\Users\fleishor> Get-Content .\sqlscript.sql | mariadb -hlocalhost -P13306 --skip-ssl --xml -uroot MyMariaDB
 ~~~
 
 

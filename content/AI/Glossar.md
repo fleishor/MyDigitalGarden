@@ -11,6 +11,8 @@ tags:
 
 ## Large Language Model (LLM)
 
+## Retrieval-Augmented Generation (RAG)
+
 
 ## AI Agent
 
