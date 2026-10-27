@@ -102,3 +102,40 @@ flowchart TB
 - Die Chunksize legt fest, in wie große Textstücke ein Dokument geteilt wird. Das ist nötig, damit das RAG-System nicht jedes Mal ein ganzes Buch durchsuchen und dem LLM übergeben muss.
 - Ein 100-Wörter-Chunk und ein 500-Wörter-Chunk können beide Embeddings mit je 1.536 Zahlenwerten erhalten. Kleinere Chunks erzeugen allerdings mehr einzelne Embeddings und damit mehr gespeicherte Vektoren somit eine genauere Suche, wird aber bei langen Prosa-Texten zum Nachteil. Wir haben viele Vektoren aber mit wenig essenziellen Inhalt. Der Vektor beschreibt ja einen Punkt im Bedeutungsraum.
 
+
+
+## Skills vs MCP vs RAG vs Memory
+
+### Skills
+
+- Skills sind wiederverwendbare Anleitungen, die einem KI-Agenten sagen, wie er eine bestimmte Aufgabe erledigen soll
+- welche Schritte er befolgt
+- welche Regeln gelten
+- woran er das Ergebnis prüft
+
+### MCP (Model Context Protocol)
+
+- Ist ein offener Standard, über den KI-Anwendungen einheitlich mit externen Tools und Datenquellen kommunizieren können (z.B. mit Dateien, Datenbanken, Email, Kalender, Chat, usw.)
+- Ein MCP-Server stellt Funktionen bereit 
+- Die KI-Anwendung verbindet sich als MCP-Client damit und ruf die Funktionen auf.
+
+### Skills vs. MCP
+- Skill beschreibt, **wie** eine Aufgabe zu erledigen ist
+- MCP stellt die notwendigen externen Tools zur Verfügung **womit**
+
+### RAG 
+- Stellt eigene statische Wissensquellen zur Verfügung, z.B. Dokumente, 
+- RAG ist das eigene/firmeninterne Wissen, und das LLM nutzt dieses Wissen um die Antwort zu erzeugen.
+
+### Memory
+- Sind Mechanismen um Systeminformation zu merken und später wieder zu verwenden.
+
+### RAG vs. Memory
+- RAG wird ein einem Anwender angelegt bzw. eingepflegt
+- Memory wird vom KI-Agenten angelegt und verwendet.
+
+### Summary
+- Wissen das niedergeschrieben ist --> RAG
+- Wissen das der KI-Agent gesammelt hat --> Memory
+- Anweisungen die wiederholt befolgt werden müssen --> Skills
+- Schnittstelle zu externen Tools --> MCP
