@@ -24,7 +24,7 @@ tags:
 5. Die Antwort wird an `self.history` angehängt. Überschreitet der Verlauf `MAX_HISTORY_MESSAGES`, werden jeweils die ersten zwei Nachrichten entfernt, damit vollständige Benutzer-/Assistenten-Paare erhalten bleiben.
 6. Die Antwort wird als Rich-Markdown im Chat angezeigt. Falls die API Nutzungsdaten geliefert hat, zeigt die Methode zusätzlich Eingabe-, Cache-, Ausgabe-, Reasoning- und Gesamttokens an.
 
-### TUI Chat Client mit function calling
+## TUI Chat Client mit function calling
 
 - Der Chat Client sendet den Gesprächsverlauf an die OpenAI Responses API und stellt ihr das Tool `read_file` über `TOOLS` zur Verfügung.
 - Die API kann entweder direkt eine Antwort liefern oder einen Function Call anfordern. 
