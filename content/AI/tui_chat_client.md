@@ -1,7 +1,6 @@
 ---
 showOnIndexPage: true
-draft: true
-date: 2026-10-21
+date: 2026-11-09
 title: TUI chat client
 image: AI.png
 description: Einfacher TUI chat client demonstrating function calls and MCP
@@ -46,7 +45,66 @@ tags:
 6. Fügt die Assistentenantwort zu `self.history` hinzu. Bei mehr als `MAX_HISTORY_MESSAGES` Einträgen werden jeweils die ersten zwei Nachrichten entfernt; damit bleibt der Verlauf auf vollständige Benutzer-/Assistenten-Paare ausgerichtet.
 7. Zeigt die Antwort als Rich-Markdown an. Sind Nutzungsdaten vorhanden, zeigt die Methode zusätzlich Tokenzahlen einschließlich Cache- und Reasoning-Tokens an.
 
+### handle_function_calls()
+1. Filtere aus `response.output` alle function calls
+2. Iteriere über alle function calls (es können mehrere sein)
+3. function_call.arguments enthält die Aufrufparameter für den Funktionsaufruf in JSON
+4. Rufe die Funktion auf
+5. Füge das Ergebnis des function calls zum request_input, sodass das Ergebnis bei nächsten LLM -Aufruf mitgegeben werden kann.
 
-## Inspect MCP server
-npx -y @modelcontextprotocol/inspector
+## TUI Chat Client mit MCP calls
+
+### MCP-Server starten
+
+~~~
+~/MyDevelopment/AI$ source .venv/bin/activate
+~/MyDevelopment/AI$ python -m pip install -r requirements.txt
+~/MyDevelopment/AI$ python tui_chat_client/mcp_file_server.py
+
+INFO:     Started server process [21057]
+INFO:     Waiting for application startup.
+INFO:     StreamableHTTP session manager started
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8080 (Press CTRL+C to quit)
+~~~
+
+
+### Inspect MCP server
+
+~~~
+~$ npx -y @modelcontextprotocol/inspector
+npm notice run npx
+npm notice run 'inspector'
+Starting MCP inspector...
+
+MCP Inspector Web is up and running at:
+   http://127.0.0.1:6274?MCP_INSPECTOR_API_TOKEN=b23e59f06c4f9d7ebbaf88eb0458d3aeede5f4a5b849fa210088831dc8a78b0e
+
+   Sandbox (MCP Apps): http://127.0.0.1:6275/sandbox
+
+   Auth token: b23e59f06c4f9d7ebbaf88eb0458d3aeede5f4a5b849fa210088831dc8a78b0e
+
+   Secrets: OS keychain
+
+Opening browser...
+~~~
+
+![[./Images-tui_chat_client/Add_MCPServer_To_Inspector.png]]
+
+![[MCPInspector.png]]
+
+### `get_answer()` 
+
+- Analog zu function calling
+- MCP calls sind aus LLM-Sicht function calls
+- Auch die Rückfragen vom LLM werden über function calls abgebildet
+
+### execute_mcp_function_calls()
+- Leitet den function call an den MCP-Server weiter
+- Die Antwort des MCP-Servers wir als request_input an den LLM weitergeleitet.
+
+### on_mount
+- Rufe den MCP server auf und frage nach allen tools
+- Diese Toolsliste wird als tools an das LLM weitergegeben.
+ 
 
