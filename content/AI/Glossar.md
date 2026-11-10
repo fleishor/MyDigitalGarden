@@ -1,7 +1,7 @@
 ---
 showOnIndexPage: true
 draft: true
-date: 2026-04-13
+date: 2026-09-11
 title: Glossar
 image: AI.png
 description: Eine Übersicht über AI Begriffe
@@ -13,6 +13,16 @@ tags:
 
 ## Vektordatenbank
 
+### Qdrant ([https://qdrant.tech/](https://qdrant.tech/))
+- Schnell, sicher, in Rust geschrieben. 
+- Nutzt SIMD‑Optimierungen für extrem niedrige Latenzen
+- Payload‑Filtering erlaubt komplexe Filter über Metadaten
+- gRPC, REST und nativen Clients
+- Snapshot‑Feature sichert komplette Indizes im laufenden Betrieb.
+### Chroma ([https://www.trychroma.com/](https://www.trychroma.com/))
+- Chroma läuft in‑process innerhalb deines Python‑Scripts, sodass du keine externe Datenbank benötigst. 
+- Persistenz übernimmt DuckDB oder SQLite
+- Dank Simplified API reichen drei Zeilen Code, um Dokumente zu speichern und abzufragen. 
 
 ## Retrieval-Augmented Generation (RAG)
 
@@ -92,8 +102,8 @@ flowchart TB
 ## Chunks und Overlappings
 
 - Chunks sind kleinere Abschnitte, in die ein längeres Dokument für RAG aufgeteilt wird. 
-- Zu kleine Chunks und wir haben fehlenden Kontext
-- Zu große Chunks und wir bekommen schlechtere Retrieval-Qualität
+- Zu kleine Chunks -> fehlenden Kontext
+- Zu große Chunks -> schlechtere Retrieval-Qualität
 - Lange Geschichten mit größerer Chunksize, da im Text viel prosa ist
 - Kurzer Text mit kleinerer Chunksize, um die Feinheiten im Text besser rauszufiltern.
 - z.B. Rechnungen, Bestellungen mit kleiner Chunksize, da viel Information konzentriert gespeichert wird.
