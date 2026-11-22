@@ -118,7 +118,8 @@ flowchart TB
 
 ### Skills
 
-- Skills sind wiederverwendbare Anleitungen, die einem KI-Agenten sagen, wie er eine bestimmte Aufgabe erledigen soll
+- Skills sind wiederverwendbare Anleitungen, die einem KI-Agenten sagen, 
+- wie er eine bestimmte Aufgabe erledigen soll
 - welche Schritte er befolgt
 - welche Regeln gelten
 - woran er das Ergebnis prüft
