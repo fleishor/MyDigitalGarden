@@ -1,16 +1,13 @@
 ---
-showOnIndexPage: true
-draft: true
-date: 2026-09-11
+showOnIndexPage: false
+draft: false
+date: 2026-11-23
 title: Glossar
 image: AI.png
 description: Eine Übersicht über AI Begriffe
 tags:
   - AI
 ---
-## Large Language Model (LLM)
-
-
 ## Vektordatenbank
 
 ### Qdrant ([https://qdrant.tech/](https://qdrant.tech/))
@@ -97,8 +94,6 @@ flowchart TB
 - Die Koordinaten dieser Punkte sind Zahlen aus dem Embedding, aber die einzelnen Dimensionen haben meist keine direkt verständliche Bedeutung. 
 - Zum Beispiel liegen „Kennwort ändern“ und „Passwort zurücksetzen“ auf dieser Landkarte nahe beieinander
 - **Wichtig**: der Bedeutungsraum ist sprach unabhängig, sprich Wörter/Sätze mit gleicher Bedeutung liegen eng beieinander, unabhängig ob Englisch, Deutsch oder Französisch.
-## AI Agent
-
 ## Chunks und Overlappings
 
 - Chunks sind kleinere Abschnitte, in die ein längeres Dokument für RAG aufgeteilt wird. 
