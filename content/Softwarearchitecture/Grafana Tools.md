@@ -1,7 +1,7 @@
 ---
 showOnIndexPage: true
 date: 2026-08-07
-title: Granfa Tools and Toolstacks
+title: Grafana Tools and Toolstacks
 image: Grafana.png
 description: Eine kurze Übersicht über alle Grafana Tools bzw. die Grafana Toolstacks
 tags:
